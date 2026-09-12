@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: ayurclinic-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ayurclinic
+      POSTGRES_USER: ayurclinic
+      POSTGRES_PASSWORD: ayurclinic_local
+    ports:
+      - "5432:5432"
+    volumes:
+      - ayurclinic-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ayurclinic -d ayurclinic"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  ayurclinic-postgres-data:

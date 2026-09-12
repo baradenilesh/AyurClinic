@@ -1,0 +1,21 @@
+# Sprint 0 Checklist
+
+- [ ] Create GitHub repository
+- [ ] Protect main branch
+- [ ] Configure pull requests
+- [ ] Configure CI
+- [ ] Install Java 21
+- [ ] Install Docker
+- [ ] Verify Maven
+- [ ] Start PostgreSQL with Docker Compose
+- [ ] Create Spring Boot project
+- [ ] Create React project
+- [ ] Agree package/module naming
+- [ ] Configure local environment variables
+- [ ] Add README
+- [ ] Add architecture documentation
+- [ ] Add database documentation
+- [ ] Add coding standards
+- [ ] Create initial GitHub epics/issues
+- [ ] Verify `mvn test`
+- [ ] Verify health endpoint
