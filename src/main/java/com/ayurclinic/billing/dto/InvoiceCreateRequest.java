@@ -1,0 +1,57 @@
+package com.ayurclinic.billing.dto;
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class InvoiceCreateRequest {
+
+    @NotNull(message = "Clinic ID is required")
+    private UUID clinicId;
+
+    @NotNull(message = "Patient ID is required")
+    private UUID patientId;
+
+    private UUID appointmentId;
+
+    private UUID consultationId;
+
+    private LocalDate invoiceDate;
+
+    private LocalDate dueDate;
+
+    @NotNull(message = "Subtotal is required")
+    @DecimalMin(
+            value = "0.00",
+            message = "Subtotal cannot be negative"
+    )
+    private BigDecimal subtotal;
+
+    @DecimalMin(
+            value = "0.00",
+            message = "Discount cannot be negative"
+    )
+    private BigDecimal discount;
+
+    @DecimalMin(
+            value = "0.00",
+            message = "Tax cannot be negative"
+    )
+    private BigDecimal tax;
+
+    @Size(
+            max = 1000,
+            message = "Notes cannot exceed 1000 characters"
+    )
+    private String notes;
+}

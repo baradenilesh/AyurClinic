@@ -9,8 +9,6 @@ import java.util.UUID;
 
 public class CreatePatientRequest {
 
-    @NotNull
-    private UUID tenantId;
 
     @NotNull
     private UUID clinicId;
@@ -36,13 +34,6 @@ public class CreatePatientRequest {
 
     private String emergencyContactMobile;
 
-    public UUID getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(UUID tenantId) {
-        this.tenantId = tenantId;
-    }
 
     public UUID getClinicId() {
         return clinicId;

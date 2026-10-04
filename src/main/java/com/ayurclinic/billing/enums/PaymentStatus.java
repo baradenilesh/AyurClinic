@@ -1,0 +1,12 @@
+package com.ayurclinic.billing.enums;
+
+public enum PaymentStatus {
+
+    PENDING,
+
+    COMPLETED,
+
+    FAILED,
+
+    REFUNDED
+}

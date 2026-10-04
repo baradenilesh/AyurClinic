@@ -9,16 +9,59 @@ import java.util.UUID;
 
 public interface PatientRepository extends JpaRepository<Patient, UUID> {
 
-    Optional<Patient> findByPatientNumber(String patientNumber);
+    Optional<Patient> findByIdAndTenantId(
+            UUID id,
+            UUID tenantId
+    );
 
-    boolean existsByMobile(String mobile);
+    Optional<Patient> findByPatientNumberAndTenantId(
+            String patientNumber,
+            UUID tenantId
+    );
 
-    boolean existsByMobileAndIdNot(String mobile, UUID id);
+    boolean existsByPatientNumberAndTenantId(
+            String patientNumber,
+            UUID tenantId
+    );
 
-    List<Patient> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(
+    boolean existsByMobileAndTenantId(
+            String mobile,
+            UUID tenantId
+    );
+
+    boolean existsByMobileAndTenantIdAndIdNot(
+            String mobile,
+            UUID tenantId,
+            UUID id
+    );
+
+    List<Patient> findByTenantId(
+            UUID tenantId
+    );
+
+    long countByTenantId(UUID tenantId);
+
+    long countByTenantIdAndStatus(UUID tenantId, String status);
+
+    List<Patient> findByTenantIdAndStatus(
+            UUID tenantId,
+            String status
+    );
+
+    List<Patient> findByTenantIdAndFirstNameContainingIgnoreCaseOrTenantIdAndLastNameContainingIgnoreCase(
+            UUID tenantId1,
             String firstName,
+            UUID tenantId2,
             String lastName
     );
 
-    List<Patient> findByStatus(String status);
+    Optional<Patient> findByMobileAndTenantId(
+            String mobile,
+            UUID tenantId
+    );
+
+    List<Patient> findByTenantIdAndPatientNumberContainingIgnoreCase(
+            UUID tenantId,
+            String patientNumber
+    );
 }

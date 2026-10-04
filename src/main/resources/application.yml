@@ -1,6 +1,10 @@
 spring:
   application:
     name: ayurclinic-backend
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/ayurclinic}
@@ -11,11 +15,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
-    properties:
-      hibernate:
-        jdbc:
-          time_zone: UTC
-
   flyway:
     enabled: true
     locations: classpath:db/migration
@@ -32,3 +31,22 @@ management:
 
 server:
   port: ${SERVER_PORT:8080}
+
+
+jwt:
+  secret: Ymx1ZTE0ZmlzaDE0d2F0ZXIxNHF3ZXJ0eXVpb3Bhc2QK
+  expiration: 3600000
+
+ayurclinic:
+  notification:
+    reminder-days-before: 1
+    reminder-hour: 9
+    reminder-minute=: 0
+    provider:
+      mode: mock
+  document:
+    storage:
+      local-base-dir: /storage/documents
+      max-file-size: 10485760
+  public:
+      clinic-id: 38aceb8a-f904-4063-86bb-a01f8caa9100

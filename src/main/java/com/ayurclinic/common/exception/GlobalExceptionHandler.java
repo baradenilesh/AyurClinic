@@ -1,45 +1,68 @@
 package com.ayurclinic.common.exception;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrorResponse handleEntityNotFound(
+            EntityNotFoundException exception,
+            HttpServletRequest request) {
+
+        return ApiErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(404)
+                .error("NOT_FOUND")
+                .message(exception.getMessage())
+                .path(request.getRequestURI())
+                .build();
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, Object> handleNotFound(
-            ResourceNotFoundException exception) {
+    public ApiErrorResponse handleResourceNotFound(
+            ResourceNotFoundException exception,
+            HttpServletRequest request) {
 
-        Map<String, Object> response = new HashMap<>();
-
-        response.put("status", 404);
-        response.put("message", exception.getMessage());
-
-        return response;
+        return ApiErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(404)
+                .error("NOT_FOUND")
+                .message(exception.getMessage())
+                .path(request.getRequestURI())
+                .build();
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, Object> handleBadRequest(
-            IllegalArgumentException exception) {
+    public ApiErrorResponse handleBadRequest(
+            IllegalArgumentException exception,
+            HttpServletRequest request) {
 
-        Map<String, Object> response = new HashMap<>();
-
-        response.put("status", 400);
-        response.put("message", exception.getMessage());
-
-        return response;
+        return ApiErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(400)
+                .error("BAD_REQUEST")
+                .message(exception.getMessage())
+                .path(request.getRequestURI())
+                .build();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, Object> handleValidation(
-            MethodArgumentNotValidException exception) {
+    public ApiErrorResponse handleValidation(
+            MethodArgumentNotValidException exception,
+            HttpServletRequest request) {
 
         Map<String, String> errors = new HashMap<>();
 
@@ -52,12 +75,13 @@ public class GlobalExceptionHandler {
                         )
                 );
 
-        Map<String, Object> response = new HashMap<>();
-
-        response.put("status", 400);
-        response.put("message", "Validation failed");
-        response.put("errors", errors);
-
-        return response;
+        return ApiErrorResponse.builder()
+                .timestamp(OffsetDateTime.now())
+                .status(400)
+                .error("VALIDATION_ERROR")
+                .message("Validation failed")
+                .path(request.getRequestURI())
+                .errors(errors)
+                .build();
     }
 }

@@ -20,7 +20,7 @@ public class Patient {
     @Column(name = "clinic_id", nullable = false)
     private UUID clinicId;
 
-    @Column(name = "patient_number", nullable = false, unique = true)
+    @Column(name = "patient_number", nullable = false)
     private String patientNumber;
 
     @Column(name = "first_name", nullable = false)

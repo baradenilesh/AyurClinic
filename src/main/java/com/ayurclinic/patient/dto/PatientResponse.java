@@ -1,5 +1,6 @@
 package com.ayurclinic.patient.dto;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class PatientResponse {
@@ -8,10 +9,17 @@ public class PatientResponse {
     private String patientNumber;
     private UUID tenantId;
     private UUID clinicId;
+
     private String firstName;
     private String lastName;
+
+    private String gender;
+    private LocalDate dateOfBirth;
+
     private String mobile;
     private String email;
+    private String address;
+
     private String status;
 
     public UUID getId() {
@@ -62,6 +70,22 @@ public class PatientResponse {
         this.lastName = lastName;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getMobile() {
         return mobile;
     }
@@ -76,6 +100,14 @@ public class PatientResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getStatus() {
